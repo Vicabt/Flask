@@ -1,9 +1,0 @@
-/* Usar Poppins para encabezados y Nunito para texto*/
-body {
-    font-family: 'Nunito', sans-serif;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600; /* Titulos un poco mas destacados */
-}
