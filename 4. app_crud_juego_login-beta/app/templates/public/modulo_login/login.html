@@ -1,0 +1,23 @@
+
+<h1 class="mb-5 text-center" id="title">Inicia sesión <hr> </h1>
+
+<form action="{{ url_for('loginUser') }}" method="POST" autocomplete="off">
+    <div class="mb-4">
+        <label for="email" class="form-label">Correo Electrónico</label>
+        <input type="email" name="email" id="email" class="form-control" required="true">
+    </div>
+
+    <div class="mb-4">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="password" name="password" class="form-control" required="true">
+    </div>
+
+    <div class="d-grid gap-2 mb-3">
+        <button type="submit" class="btn btn-primary btn-send btn-lg">Entrar</button>
+    </div>
+
+    <div class="text-center">
+        <span>¿No tienes cuenta? </span>
+        <a href="#" id="link_sign_up" class="createUser btn-lg">Crear cuenta</a>
+    </div>
+</form>

@@ -1,0 +1,102 @@
+{% extends 'public/dashboard/home.html' %} 
+{% block title %}Perfil | {{ dataUser.nombre }} {% endblock %}
+
+{% block body %}
+<!-- {{ session }} -->
+
+<div class="row justify-content-md-center mb-5">
+    <div class="col-md-10 cajaLogin styFormDashboard">
+        <h2 class="text-center titleDashboard mt-3">Editar mi Perfil <hr></h2>
+
+        <form action='{{url_for("actualizarMiPerfil",id=dataUser.id)}}' method="POST" autocomplete="off">
+            <!-- Nombre y Apellido -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <label for="nombre" class="form-label">Nombre de Usuario</label>
+                    <input type="text" name="nombre" value="{{ dataUser.nombre }}" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="apellido" class="form-label">Apellido de Usuario</label>
+                    <input type="text" name="apellido" value="{{ dataUser.apellido }}" class="form-control" required>
+                </div>
+            </div>
+
+            <!-- Email y Contraseña -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" value="{{ dataUser.email }}" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="password" class="form-label" style="color:crimson;">Nueva Contraseña</label>
+                    <input type="password" name="password" class="form-control" placeholder="Opcional">
+                </div>
+            </div>
+
+            <!-- Repetir Contraseña y País -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <label for="repite_password" class="form-label" style="color:crimson;">Repetir Contraseña</label>
+                    <input type="password" name="repite_password" class="form-control" placeholder="Opcional">
+                </div>
+                <div class="col-md-6">
+                    <label for="pais" class="form-label">País</label>
+                    <select name="pais" class="form-control" required>
+                        {% for country in dataPaises %}
+                            <option value="{{ country.name_country }}" {% if dataUser.pais == country.name_country %}selected{% endif %}>{{ country.name_country }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <!-- Sexo -->
+            <div class="row mb-5">
+                <div class="col-md-5">
+                    <label for="sexo" class="form-label">Sexo</label>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" name="sexo" class="form-check-input" id="Masculino" value="Masculino" {% if dataUser.sexo == 'Masculino' %}checked{% endif %}>
+                        <label class="form-check-label" for="Masculino">Masculino</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" name="sexo" class="form-check-input" id="Femenino" value="Femenino" {% if dataUser.sexo == 'Femenino' %}checked{% endif %}>
+                        <label class="form-check-label" for="Femenino">Femenino</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="foto_perfil" class="form-label">Foto de Perfil</label>
+                <input type="file" name="foto_perfil" class="form-control">
+            </div>
+
+            <div class="col-md-6">
+                <label for="telefono" class="form-label">Número de Teléfono</label>
+                <input type="tel" name="telefono" value="{{ dataUser.telefono }}" class="form-control" pattern="^\+?[1-9]\d{1,14}$">
+            </div>
+
+            <div class="col-md-6">
+                <label for="notificaciones_email" class="form-label">Recibir notificaciones por email</label>
+                <input type="checkbox" name="notificaciones_email" {% if dataUser.notificaciones_email %}checked{% endif %}>
+            </div>
+            <div class="col-md-6">
+                <label for="notificaciones_sms" class="form-label">Recibir notificaciones por SMS</label>
+                <input type="checkbox" name="notificaciones_sms" {% if dataUser.notificaciones_sms %}checked{% endif %}>
+            </div>
+            
+
+            <!-- Botón de Guardar Cambios -->
+            <div class="row text-center justify-content-md-center mt-4">
+                <div class="col-md-12 mt-3 mb-3">
+                    <button type="submit" class="btn btn-send">Guardar Cambios</button>
+                </div>
+            </div>
+
+            <div class="col-md-12 mt-3 text-center">
+                <a href="{{ request.referrer }}" class="btn btn-secondary">Volver</a>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+{% endblock %}
