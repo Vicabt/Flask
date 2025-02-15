@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Recuperar Contraseña - VcBikes{% endblock %}
+
+{% block content %}
+<div class="recovery-container">
+    <div class="background-logo">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Background Logo">
+    </div>
+
+    <div class="recovery-box">
+        <h2 class="text-center mb-4" id="recovery-title">Recuperar Contraseña</h2>
+        
+        <form method="POST" action="{{ url_for('recuperar_password') }}" aria-labelledby="recovery-title">
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" name="email" required aria-label="Correo Electrónico">
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Enviar Instrucciones</button>
+            </div>
+            <div class="text-center mt-3">
+                <a href="{{ url_for('login') }}" class="text-decoration-none">
+                    Volver al inicio de sesión
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% block extra_css %}
+<style>
+    .recovery-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .recovery-box {
+        width: 100%;
+        max-width: 400px;
+        padding: 3rem 2.5rem;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+
+    /* Aplicar los mismos estilos del login */
+    [data-bs-theme="light"] .recovery-box {
+        background: #ffffff;
+        color: #212529;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    [data-bs-theme="dark"] .recovery-box {
+        background: rgba(32, 32, 32, 0.9);
+        color: #ffffff;
+    }
+
+    /* ... resto de los estilos igual que en login.html ... */
+</style>
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,305 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar Sesión - VcBikes{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <!-- Solo mantener el logo de fondo -->
+    <div class="background-logo">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Background Logo">
+    </div>
+
+    <div class="login-box">
+        <div class="text-center mb-4">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="VcBikes Logo" class="login-logo mb-3">
+            <h2 class="login-title" id="login-title">Iniciar sesión en VcBikes</h2>
+        </div>
+        
+        <form method="POST" action="{{ url_for('login') }}" class="login-form" aria-labelledby="login-title">
+            <div class="form-group mb-3">
+                <div class="input-group">
+                    <span class="input-group-text" id="username-addon">
+                        <i class="fas fa-user"></i>
+                    </span>
+                    <input type="text" class="form-control" 
+                           id="username" name="username" required 
+                           placeholder="Ingrese su usuario (E-mail)"
+                           aria-label="Usuario" aria-describedby="username-addon">
+                </div>
+            </div>
+
+            <div class="form-group mb-4">
+                <div class="input-group">
+                    <span class="input-group-text" id="password-addon">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                    <input type="password" class="form-control" 
+                           id="password" name="password" required
+                           placeholder="Ingrese su contraseña"
+                           aria-label="Contraseña" aria-describedby="password-addon">
+                </div>
+            </div>
+
+            <div class="form-check mb-4">
+                <input type="checkbox" class="form-check-input" id="remember">
+                <label class="form-check-label" for="remember">Recordarme</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mb-3">
+                Iniciar sesión
+            </button>
+
+            <div class="text-center">
+                <a href="{{ url_for('recuperar_password') }}" class="text-decoration-none d-block mb-2">
+                    ¿Olvidaste tu contraseña?
+                </a>
+                <span class="d-block mb-2">¿No tienes una cuenta?</span>
+                <a href="{{ url_for('registro') }}" class="text-decoration-none">
+                    Crear cuenta nueva
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% block extra_css %}
+<style>
+    .login-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .login-box {
+        width: 100%;
+        max-width: 400px;
+        padding: 3rem 2.5rem;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .login-logo {
+        width: auto;
+        height: 150px;
+        margin-bottom: 1.5rem;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    }
+
+    .login-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 2.5rem;
+    }
+
+    .background-logo {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+        opacity: 0.02;
+        pointer-events: none;
+    }
+
+    .background-logo img {
+        width: 1200px;
+        height: auto;
+        filter: grayscale(100%);
+        transform: rotate(-5deg);
+    }
+
+    .form-control, .input-group-text {
+        height: 50px;
+        font-size: 1rem;
+        border-radius: 8px;
+    }
+
+    .input-group-text {
+        width: 50px;
+        justify-content: center;
+    }
+
+    .input-group > :first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .input-group > :last-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .form-check-input {
+        width: 1.2em;
+        height: 1.2em;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .form-check-label {
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .btn-primary {
+        height: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        background: linear-gradient(145deg, #0099cc, #0088b3);
+        box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);
+        border: none;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 153, 204, 0.3);
+        background: linear-gradient(145deg, #00a8e0, #0099cc);
+    }
+
+    .btn-primary:active {
+        transform: translateY(0);
+    }
+
+    a {
+        color: #0099cc !important;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    a:hover {
+        color: #007aa3 !important;
+        text-decoration: none;
+    }
+
+    a::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: -2px;
+        left: 0;
+        background-color: currentColor;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+
+    a:hover::after {
+        transform: scaleX(1);
+    }
+
+    .input-group {
+        background: transparent;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .form-control, .input-group-text {
+        height: 55px;
+        font-size: 1rem;
+        padding: 0.75rem 1.2rem;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .input-group-text {
+        width: 55px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+    }
+
+    [data-bs-theme="light"] .login-box {
+        background: rgba(255, 255, 255, 0.75);
+        color: #2c3e50;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(12px);
+    }
+
+    [data-bs-theme="light"] .form-control {
+        background-color: rgba(240, 242, 245, 0.9) !important;
+        color: #2c3e50 !important;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+    }
+
+    [data-bs-theme="light"] .input-group-text {
+        background-color: rgba(240, 242, 245, 0.9) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        color: #0099cc;
+    }
+
+    [data-bs-theme="light"] .form-control:focus {
+        background-color: rgba(255, 255, 255, 0.95) !important;
+        border-color: #0099cc;
+        box-shadow: 0 0 0 3px rgba(0, 153, 204, 0.15);
+    }
+
+    [data-bs-theme="light"] .login-title {
+        color: #2c3e50;
+    }
+
+    [data-bs-theme="dark"] .login-box {
+        background: rgba(32, 32, 32, 0.9);
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    [data-bs-theme="dark"] .form-control {
+        background-color: rgba(48, 48, 48, 0.9) !important;
+        border: none;
+        color: #ffffff !important;
+    }
+
+    [data-bs-theme="dark"] .input-group-text {
+        background-color: rgba(48, 48, 48, 0.9) !important;
+        border: none;
+        color: #0099cc;
+    }
+
+    [data-bs-theme="dark"] .login-title {
+        color: #ffffff;
+    }
+
+    [data-bs-theme="dark"] .form-control:focus {
+        border-color: #0099cc;
+        background-color: rgba(35, 35, 35, 0.9) !important;
+        box-shadow: 0 0 0 4px rgba(0, 153, 204, 0.15);
+    }
+
+    [data-bs-theme="dark"] .input-group:focus-within .input-group-text {
+        border-color: #0099cc;
+        background-color: rgba(35, 35, 35, 0.9) !important;
+    }
+
+    .form-control::placeholder {
+        opacity: 0.6;
+        font-size: 0.95rem;
+    }
+
+    .input-group:hover .form-control,
+    .input-group:hover .input-group-text {
+        border-color: rgba(0, 153, 204, 0.5);
+    }
+
+    .input-group .form-control {
+        border-left: none;
+    }
+
+    .input-group-text {
+        border-right: none;
+    }
+</style>
+{% endblock %}
+{% endblock %}
